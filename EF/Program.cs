@@ -10,13 +10,27 @@ namespace EF
         {
             using (var db = new FirstApp.AppContext())
             {
-                var user1 = new User { Name = "Arthur", Email = "mail1@mail.ru", Role = "Admin" };
-                var user2 = new User { Name = "klim", Email = "mail2@mail.ru", Role = "User" };
+                var company1 = new Company { Name = "SF" };
+                var company2 = new Company { Name = "VK" };
 
-                db.Users.Add(user1);
-                db.Users.Add(user2);
+                var company3 = new Company { Name = "FB" };
+                db.Companies.Add(company3);
+                db.SaveChanges();
+
+                var user1 = new User { Name = "Arthur", Email = "mail2@mail.ru" ,Role = "Admin" };
+                var user2 = new User { Name = "Bob", Email = "mail2@mail.ru", Role = "Admin" };
+                var user3 = new User { Name = "Clark", Email = "mail2@mail.ru", Role = "User" };
+
+                user1.Company = company1;
+                company2.Users.Add(user2);
+                user3.CompanyId = company3.Id;
+
+                db.Companies.AddRange(company1, company2);
+                db.Users.AddRange(user1, user2, user3);
+
                 db.SaveChanges();
             }
         }
     }
+    
 }
