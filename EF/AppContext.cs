@@ -15,7 +15,7 @@ namespace FirstApp
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.;Database=EF;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=.;Database=EF;Trusted_Connection=True;TrustServerCertificate=True;");
         }
     }
 }
